@@ -1,0 +1,19 @@
+{
+  "name": "designer",
+  "version": "0.0.1",
+  "description": "designer tools for our favorite clients",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:pspEgg/designer.git"
+  },
+  "author": "Dan Liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pspEgg/designer/issues"
+  },
+  "homepage": "https://github.com/pspEgg/designer"
+}
