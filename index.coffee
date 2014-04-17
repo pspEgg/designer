@@ -13,7 +13,7 @@ scriptLoc = '/npm/designer.js'
 scriptTag = "<script type='text/javascript' src='#{scriptLoc}'></script>"
 
 exports.design = (app) ->
-  # app.get scriptLoc, send
+  app.get scriptLoc, (req, res) -> res.sendfile(path.join(__dirname, './public/designer.js'))
 
   # bottom of page injection
   app.use require('connect-inject')({snippet: scriptTag})
