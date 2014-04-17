@@ -3,7 +3,7 @@
 
 # middleware to inject code into html responseses
 # https://www.npmjs.org/package/connect-inject
-socket = require 'socket.io'
+
 http = require 'http'
 path = require 'path'
 
@@ -12,11 +12,13 @@ fsdb = require './fsdb'
 scriptLoc = '/npm/designer.js'
 scriptTag = "<script type='text/javascript' src='#{scriptLoc}'></script>"
 
+socketTag = "<script type='text/javascript' src='/socket.io/socket.io.js'></script>"
+
 exports.design = (app) ->
   app.get scriptLoc, (req, res) -> res.sendfile(path.join(__dirname, './public/designer.js'))
 
   # bottom of page injection
-  app.use require('connect-inject')({snippet: scriptTag})
+  app.use require('connect-inject')({snippet: [socketTag, scriptTag]})
 
   app.locals.db = new fsdb(path.join(process.env.PWD, './default.yml'))
   # reload database
@@ -27,5 +29,9 @@ exports.design = (app) ->
   # app.locals.designerScriptTag = scriptTag
 
   # make server for socket.io to piggy back on
-  # server = http.createServer(app)
-  # socket.listen(server)
+  server = http.createServer(app)
+  io = require('socket.io').listen(server)
+  io.sockets.on 'connection', (socket) ->
+    socket.on 'draft', (data) ->
+
+  return server
