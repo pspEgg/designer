@@ -32,19 +32,15 @@ parseObj = (obj, listName) ->
 
 # give a text enough data-* for editing
 tapMarkup = (text, propName, listName, id) ->
+  # jQuery e.g. data-options='{"name":"John"}'
+  dataAttr =
+    id: id
+    prop: propName
+    list: listName
   "<span
   style='display:inline-block'
-  #{dataAttr('prop', propName)}
-  #{dataAttr('list', listName)}
-  #{dataAttr('id', id)}
+  data-design-text='#{JSON.stringify(dataAttr)}'
   >#{text}</span>"
-  # "#{listName}: #{propName}: #{text}"
-
-dataAttr = (name, text) ->
-  if text
-    "data-design-#{name}=#{text}"
-  else
-    ""
 
 class FSDB
   constructor: (@path) ->
