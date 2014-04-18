@@ -10,10 +10,10 @@ makeListItem = (listName) ->
   return sample
 
 addListItem = (listName) ->
-  $("[data-design-list=#{listName}]").prepend(makeListItem(listName)) 
+  $("[data-design-list-actions=#{listName}]").after(makeListItem(listName)) 
 
 makeAddBtn = (listName) ->
-  $("<button>Add a #{listName}</button>")
+  $("<button data-design-list-actions='#{listName}'>Add a #{listName}</button>")
     .click () ->
       addListItem(listName)
 

@@ -27,11 +27,11 @@ makeListItem = function(listName) {
 };
 
 addListItem = function(listName) {
-  return $("[data-design-list=" + listName + "]").prepend(makeListItem(listName));
+  return $("[data-design-list-actions=" + listName + "]").after(makeListItem(listName));
 };
 
 makeAddBtn = function(listName) {
-  return $("<button>Add a " + listName + "</button>").click(function() {
+  return $("<button data-design-list-actions='" + listName + "'>Add a " + listName + "</button>").click(function() {
     return addListItem(listName);
   });
 };
