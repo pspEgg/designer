@@ -5,11 +5,11 @@ revert = (el) ->
   el.blur()
 
 save = (event, el, socket) ->
-  key =  $(el).data('single-line')
+  attr =  $(el).data('design-text')
   console.log 'html: ' + $(el).html()
-  value = $(el).text()
-  console.log 'drafting ' + value
-  # socket.emit('draft', [key, value])
+  attr.text = $(el).text()
+  console.log 'drafting ' + attr.text
+  socket.emit('draft', attr)
   el.blur()
   event.preventDefault()
 

@@ -1,11 +1,13 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var list, single;
+var list, single, socket;
+
+socket = io.connect('/');
 
 single = require('./single-line-editor');
 
 list = require('./list-manager');
 
-single.editable();
+single.editable(socket);
 
 list.manageLists();
 
@@ -25,11 +27,12 @@ revert = function(el) {
 };
 
 save = function(event, el, socket) {
-  var key, value;
-  key = $(el).data('single-line');
+  var attr;
+  attr = $(el).data('design-text');
   console.log('html: ' + $(el).html());
-  value = $(el).text();
-  console.log('drafting ' + value);
+  attr.text = $(el).text();
+  console.log('drafting ' + attr.text);
+  socket.emit('draft', attr);
   el.blur();
   return event.preventDefault();
 };

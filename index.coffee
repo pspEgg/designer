@@ -35,5 +35,6 @@ exports.design = (app) ->
   io = require('socket.io').listen(server)
   io.sockets.on 'connection', (socket) ->
     socket.on 'draft', (data) ->
+      console.log "Drafting #{JSON.stringify data}"
 
   return server

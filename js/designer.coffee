@@ -1,5 +1,7 @@
+socket = io.connect('/')
+
 single = require './single-line-editor'
 list = require './list-manager'
 
-single.editable()
+single.editable(socket)
 list.manageLists()
