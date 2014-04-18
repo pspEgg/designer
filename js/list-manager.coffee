@@ -5,6 +5,8 @@ makeListItem = (listName) ->
   sample.find('[data-design-text]').each (index, element) ->
     # Without .each only the first property's data attribute is replaced
     $(element).data('design-text').id = uniqueID
+    # Trigger draft()
+    $(element).blur()
   return sample
 
 addListItem = (listName) ->

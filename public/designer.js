@@ -20,7 +20,8 @@ makeListItem = function(listName) {
   sample = $("[data-design-list-item=" + listName + "]").last().clone(true);
   uniqueID = Date.now();
   sample.find('[data-design-text]').each(function(index, element) {
-    return $(element).data('design-text').id = uniqueID;
+    $(element).data('design-text').id = uniqueID;
+    return $(element).blur();
   });
   return sample;
 };
