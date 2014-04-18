@@ -13,8 +13,32 @@ list.manageLists();
 
 
 },{"./list-manager":2,"./single-line-editor":3}],2:[function(require,module,exports){
+var addListItem, makeAddBtn, makeListItem;
+
+makeListItem = function(listName) {
+  var sample, uniqueID;
+  sample = $("[data-design-list-item=" + listName + "]").last().clone();
+  uniqueID = Date.now();
+  sample.find('[data-design-text]').data('design-text').id = uniqueID;
+  return sample;
+};
+
+addListItem = function(listName) {
+  return $("[data-design-list=" + listName + "]").prepend(makeListItem(listName));
+};
+
+makeAddBtn = function(listName) {
+  return $("<button>Add a " + listName + "</button>").click(function() {
+    return addListItem(listName);
+  });
+};
+
 exports.manageLists = function() {
-  return $('[data-design-list]').prepend('<div>Add</div>');
+  return $('[data-design-list]').prepend(function() {
+    var listName;
+    listName = $(this).data('design-list');
+    return makeAddBtn(listName);
+  });
 };
 
 
