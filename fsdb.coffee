@@ -58,15 +58,15 @@ class FSDB
     # list = (new FSObject(obj) for obj in list) or [new FSObject]
     list = (parseObj(obj, listName) for obj in @snapshot[listName])
 
-  # Create a tap-to-author area
-  author: (listName, propName, constraints) ->
-    list = @snapshot[listName] or (@snapshot[listName] = [])
-    text = list[propName] or (list[propName] = 'new')
-    console.log @snapshot
-    "<span
-      style='display:inline-block'
-      data-author-list='#{listName}'
-      data-author-prop='#{propName}'>#{text}</span>"    
+  # # Create a tap-to-author area
+  # author: (listName, propName, constraints) ->
+  #   list = @snapshot[listName] or (@snapshot[listName] = [])
+  #   text = list[propName] or (list[propName] = 'new')
+  #   console.log @snapshot
+  #   "<span
+  #     style='display:inline-block'
+  #     data-author-list='#{listName}'
+  #     data-author-prop='#{propName}'>#{text}</span>"    
 
 
   # Read-only
