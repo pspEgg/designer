@@ -1,8 +1,10 @@
 makeListItem = (listName) ->
-  sample = $("[data-design-list-item=#{listName}]").last().clone()
+  sample = $("[data-design-list-item=#{listName}]").last().clone(true)
   uniqueID = Date.now()
   # New Id will not show up in the DOM, this is altering jQuery's internal data poll
-  sample.find('[data-design-text]').data('design-text').id = uniqueID
+  sample.find('[data-design-text]').each (index, element) ->
+    # Without .each only the first property's data attribute is replaced
+    $(element).data('design-text').id = uniqueID
   return sample
 
 addListItem = (listName) ->

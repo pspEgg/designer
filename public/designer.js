@@ -17,9 +17,11 @@ var addListItem, makeAddBtn, makeListItem;
 
 makeListItem = function(listName) {
   var sample, uniqueID;
-  sample = $("[data-design-list-item=" + listName + "]").last().clone();
+  sample = $("[data-design-list-item=" + listName + "]").last().clone(true);
   uniqueID = Date.now();
-  sample.find('[data-design-text]').data('design-text').id = uniqueID;
+  sample.find('[data-design-text]').each(function(index, element) {
+    return $(element).data('design-text').id = uniqueID;
+  });
   return sample;
 };
 

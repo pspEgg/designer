@@ -81,8 +81,13 @@ class FSDB
     # if @snapshot[key]? # Check if dict exists.
     # Find and replace with listName, propName and id
     for listItem in @snapshot[list]
-      do (listItem) ->
-        listItem[prop] = text if listItem.id is id
+      if listItem.id is id
+        listItem[prop] = text
+        return
+    # No exisiting id
+    newItem = {id: id}
+    newItem[prop] = text
+    @snapshot[list].unshift newItem 
     # save(@path, @snapshot)
 
   singleLine: (dataName) ->
