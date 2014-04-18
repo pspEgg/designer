@@ -38,5 +38,7 @@ exports.design = (app) ->
     socket.on 'draft', (data) ->
       console.log "Drafting #{JSON.stringify data}"
       app.locals.db.draft(data)
+    socket.on 'delete', (data) ->
+      app.locals.db.delete(data)
 
   return server

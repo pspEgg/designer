@@ -58,6 +58,13 @@ class FSDB
     # list = (new FSObject(obj) for obj in list) or [new FSObject]
     list = (parseObj(obj, listName) for obj in @snapshot[listName])
 
+  delete: (data) ->
+    list = data.list
+    id = data.id
+    for listItem, index in @snapshot[list]
+      if listItem.id is id
+        @snapshot[list].splice(index, 1)
+        return
   # # Create a tap-to-author area
   # author: (listName, propName, constraints) ->
   #   list = @snapshot[listName] or (@snapshot[listName] = [])

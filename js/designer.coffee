@@ -4,4 +4,4 @@ single = require './single-line-editor'
 list = require './list-manager'
 
 single.editable(socket)
-list.manageLists()
+list.manageLists(socket)

@@ -9,11 +9,11 @@ list = require('./list-manager');
 
 single.editable(socket);
 
-list.manageLists();
+list.manageLists(socket);
 
 
 },{"./list-manager":2,"./single-line-editor":3}],2:[function(require,module,exports){
-var addListItem, makeAddBtn, makeListItem;
+var addListItem, makeAddBtn, makeDeleteBtn, makeListItem;
 
 makeListItem = function(listName) {
   var sample, uniqueID;
@@ -36,11 +36,28 @@ makeAddBtn = function(listName) {
   });
 };
 
-exports.manageLists = function() {
-  return $('[data-design-list]').prepend(function() {
+makeDeleteBtn = function(listName, id, element, socket) {
+  return $("<button>Delete</button>").click(function() {
+    socket.emit('delete', {
+      list: listName,
+      id: id
+    });
+    return $(element).remove();
+  });
+};
+
+exports.manageLists = function(socket) {
+  $('[data-design-list]').prepend(function() {
     var listName;
     listName = $(this).data('design-list');
     return makeAddBtn(listName);
+  });
+  return $('[data-design-list-item]').prepend(function() {
+    var id, listName, obj;
+    obj = $(this).find('[data-design-text]').data('design-text');
+    listName = obj.list;
+    id = obj.id;
+    return makeDeleteBtn(listName, id, this, socket);
   });
 };
 

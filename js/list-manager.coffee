@@ -17,8 +17,21 @@ makeAddBtn = (listName) ->
     .click () ->
       addListItem(listName)
 
-exports.manageLists = () ->
+makeDeleteBtn = (listName, id, element, socket) ->
+  $("<button>Delete</button>")
+    .click () ->
+      socket.emit('delete', {list: listName, id: id})
+      $(element).remove()
+
+exports.manageLists = (socket) ->
   $('[data-design-list]')
     .prepend () ->
       listName = $(this).data('design-list')
       makeAddBtn(listName)
+  $('[data-design-list-item]')
+    .prepend () ->
+      obj = $(this).find('[data-design-text]').data('design-text')
+      listName = obj.list
+      id = obj.id
+      # console.log "#{listName}, #{id}"
+      makeDeleteBtn(listName, id, this, socket)
