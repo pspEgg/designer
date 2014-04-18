@@ -37,5 +37,6 @@ exports.design = (app) ->
   io.sockets.on 'connection', (socket) ->
     socket.on 'draft', (data) ->
       console.log "Drafting #{JSON.stringify data}"
+      app.locals.db.draft(data)
 
   return server

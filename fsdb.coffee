@@ -73,12 +73,17 @@ class FSDB
   display: () ->
 
   # Edit the database
-  draft: (pair) ->
-    key = pair[0]
-    value = pair[1]
+  draft: (data) ->
+    list = data.list
+    id = data.id
+    prop = data.prop
+    text = data.text
     # if @snapshot[key]? # Check if dict exists.
-    @snapshot[key] = value 
-    save(@path, @snapshot)
+    # Find and replace with listName, propName and id
+    for listItem in @snapshot[list]
+      do (listItem) ->
+        listItem[prop] = text if listItem.id is id
+    # save(@path, @snapshot)
 
   singleLine: (dataName) ->
     text = @snapshot[dataName] or (@snapshot[dataName] = 'new editable')
