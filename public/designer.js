@@ -43,7 +43,8 @@ exports.editable = function(socket) {
       case 27:
         return revert(this);
       case 13:
-        return save(event, this, socket);
+        this.blur();
+        return event.preventDefault();
     }
   }).blur(function(event) {
     return save(event, this, socket);

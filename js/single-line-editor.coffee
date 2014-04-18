@@ -21,5 +21,7 @@ exports.editable = (socket) ->
         # ESC Key
         when 27 then revert(this)
         # Enter Key
-        when 13 then save(event, this, socket)
+        when 13
+          this.blur()
+          event.preventDefault()
     .blur (event) -> save(event, this, socket)
