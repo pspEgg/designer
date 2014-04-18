@@ -19,14 +19,14 @@ exports.manageLists = function() {
 
 
 },{}],3:[function(require,module,exports){
-var revert, save;
+var draft, revert;
 
 revert = function(el) {
   document.execCommand('undo');
   return el.blur();
 };
 
-save = function(event, el, socket) {
+draft = function(event, el, socket) {
   var attr;
   attr = $(el).data('design-text');
   console.log('html: ' + $(el).html());
@@ -47,7 +47,7 @@ exports.editable = function(socket) {
         return event.preventDefault();
     }
   }).blur(function(event) {
-    return save(event, this, socket);
+    return draft(event, this, socket);
   });
 };
 

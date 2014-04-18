@@ -4,7 +4,7 @@ revert = (el) ->
   document.execCommand('undo')
   el.blur()
 
-save = (event, el, socket) ->
+draft = (event, el, socket) ->
   attr =  $(el).data('design-text')
   console.log 'html: ' + $(el).html()
   attr.text = $(el).text()
@@ -24,4 +24,4 @@ exports.editable = (socket) ->
         when 13
           this.blur()
           event.preventDefault()
-    .blur (event) -> save(event, this, socket)
+    .blur (event) -> draft(event, this, socket)
