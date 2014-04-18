@@ -33,6 +33,7 @@ exports.design = (app) ->
   # make server for socket.io to piggy back on
   server = http.createServer(app)
   io = require('socket.io').listen(server)
+  io.set 'log level', 1
   io.sockets.on 'connection', (socket) ->
     socket.on 'draft', (data) ->
       console.log "Drafting #{JSON.stringify data}"
