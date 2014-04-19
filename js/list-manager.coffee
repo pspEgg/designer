@@ -17,12 +17,12 @@ addListItem = (listName) ->
   $("[data-design-list-actions=#{listName}]").after(makeListItem(listName)) 
 
 makeAddBtn = (listName) ->
-  $("<button data-design-list-actions='#{listName}' data-design-button>+</button>")
+  $("<button data-design-list-actions='#{listName}' data-design-add-button>+</button>")
     .click () ->
       addListItem(listName)
 
 makeDeleteBtn = (listName, id, element, socket) ->
-  $("<button data-design-button>-</button>")
+  $("<button data-design-delete-button>-</button>")
     .click () ->
       socket.emit('delete', {list: listName, id: id})
       $(element).remove()

@@ -11,6 +11,8 @@ single.editable(socket);
 
 list.manageLists(socket);
 
+$('.beer-feature').find('[data-design-text]').removeAttr('contenteditable');
+
 
 },{"./list-manager":2,"./single-line-editor":3}],2:[function(require,module,exports){
 var addListItem, makeAddBtn, makeDeleteBtn, makeListItem;
@@ -31,13 +33,13 @@ addListItem = function(listName) {
 };
 
 makeAddBtn = function(listName) {
-  return $("<button data-design-list-actions='" + listName + "' data-design-button>+</button>").click(function() {
+  return $("<button data-design-list-actions='" + listName + "' data-design-add-button>+</button>").click(function() {
     return addListItem(listName);
   });
 };
 
 makeDeleteBtn = function(listName, id, element, socket) {
-  return $("<button data-design-button>-</button>").click(function() {
+  return $("<button data-design-delete-button>-</button>").click(function() {
     socket.emit('delete', {
       list: listName,
       id: id
@@ -73,7 +75,6 @@ revert = function(el) {
 draft = function(event, el, socket) {
   var attr;
   attr = $(el).data('design-text');
-  console.log('html: ' + $(el).html());
   attr.text = $(el).text();
   console.log('drafting ' + attr.text);
   socket.emit('draft', attr);

@@ -51,11 +51,14 @@ class FSDB
 
   # Return an array of author objects
   # if empty, make a new object
-  list: (listName) ->
+  list: (listName, options) ->
     # Get list or create list
     # list = @snapshot[listName] or (@snapshot[listName] = [])
     # Give list objects helper functions or add a new object
     # list = (new FSObject(obj) for obj in list) or [new FSObject]
+    if options
+      if options.readOnly
+        return @snapshot[listName]
     list = (parseObj(obj, listName) for obj in @snapshot[listName])
 
   delete: (data) ->

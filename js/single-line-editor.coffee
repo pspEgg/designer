@@ -6,7 +6,7 @@ revert = (el) ->
 
 draft = (event, el, socket) ->
   attr =  $(el).data('design-text')
-  console.log 'html: ' + $(el).html()
+  # console.log 'html: ' + $(el).html()
   attr.text = $(el).text()
   console.log 'drafting ' + attr.text
   socket.emit('draft', attr)
