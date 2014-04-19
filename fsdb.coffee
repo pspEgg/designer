@@ -17,7 +17,7 @@ save = (path, dict) ->
 load = (path) ->
   try
     db = yaml.safeLoad(fs.readFileSync(path, 'utf8'))
-    console.log('loaded: ', db)
+    # console.log('loaded: ', db)
     return db
   catch error
     console.log error
