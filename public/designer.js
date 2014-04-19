@@ -31,13 +31,13 @@ addListItem = function(listName) {
 };
 
 makeAddBtn = function(listName) {
-  return $("<button data-design-list-actions='" + listName + "'>Add a " + listName + "</button>").click(function() {
+  return $("<button data-design-list-actions='" + listName + "' data-design-button>+</button>").click(function() {
     return addListItem(listName);
   });
 };
 
 makeDeleteBtn = function(listName, id, element, socket) {
-  return $("<button>Delete</button>").click(function() {
+  return $("<button data-design-button>-</button>").click(function() {
     socket.emit('delete', {
       list: listName,
       id: id

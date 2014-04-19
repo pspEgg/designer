@@ -5,6 +5,10 @@ makeListItem = (listName) ->
   sample.find('[data-design-text]').each (index, element) ->
     # Without .each only the first property's data attribute is replaced
     $(element).data('design-text').id = uniqueID
+    # obj = $(element).data('design-text')
+    # for prop, text of obj
+      # obj[prop] = 'sample' if prop != 'id'
+    # $(element).data('design-text')[prop] = 'sample'
     # Trigger draft()
     $(element).blur()
   return sample
@@ -13,12 +17,12 @@ addListItem = (listName) ->
   $("[data-design-list-actions=#{listName}]").after(makeListItem(listName)) 
 
 makeAddBtn = (listName) ->
-  $("<button data-design-list-actions='#{listName}'>Add a #{listName}</button>")
+  $("<button data-design-list-actions='#{listName}' data-design-button>+</button>")
     .click () ->
       addListItem(listName)
 
 makeDeleteBtn = (listName, id, element, socket) ->
-  $("<button>Delete</button>")
+  $("<button data-design-button>-</button>")
     .click () ->
       socket.emit('delete', {list: listName, id: id})
       $(element).remove()
