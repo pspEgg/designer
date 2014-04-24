@@ -84,10 +84,17 @@ class FSDB
 
   # Edit the database
   draft: (data) ->
+    text = data.text
+
+    # Non-list data
+    if dataName = data.static
+      @snapshot.static[dataName] = text
+      return
+
+    # List Data
     list = data.list
     id = data.id
     prop = data.prop
-    text = data.text
     # if @snapshot[key]? # Check if dict exists.
     # Find and replace with listName, propName and id
     for listItem in @snapshot[list]
@@ -100,11 +107,14 @@ class FSDB
     @snapshot[list].unshift newItem 
     # save(@path, @snapshot)
 
-  singleLine: (dataName) ->
-    text = @snapshot[dataName] or (@snapshot[dataName] = 'new editable')
+  static: (dataName) ->
+    text = @snapshot.static[dataName] or (@snapshot.static[dataName] = 'new editable')
+    dataAttr =
+      static: dataName
     "<span
-      style='display:inline-block'
-      data-single-line='#{dataName}'>#{text}</span>"
+    style='display:inline-block'
+    data-design-text='#{JSON.stringify(dataAttr)}'
+    >#{text}</span>"
 
   readOnly: (dataName) ->
     text = @snapshot[dataName] or (@snapshot[dataName] = 'new editable')
