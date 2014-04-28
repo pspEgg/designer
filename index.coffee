@@ -20,13 +20,13 @@ toolTipTag = "<script type='text/javascript' src='#{toolTipLoc}'></script>"
 exports.design = (app) ->
   app.get jqueryLoc, (req, res) -> res.sendfile(path.join(__dirname, './public/jquery.js'))
   app.get scriptLoc, (req, res) -> res.sendfile(path.join(__dirname, './public/designer.js'))
-  app.get toolTipLoc, (req, res) -> res.sendfile(path.join(__dirname, './public/tooltip.js'))
+  # app.get toolTipLoc, (req, res) -> res.sendfile(path.join(__dirname, './public/tooltip.js'))
 
   # bottom of page injection
-  app.use require('connect-inject')({snippet: [toolTipTag, socketTag, scriptTag]})
+  app.use require('connect-inject')({snippet: [socketTag, scriptTag]})
 
   app.locals.db = new fsdb(path.join(process.env.PWD, './default.yml'))
-  # reload database
+  # reload databased
   # app.use (req, res, next) ->
   #   next()
 

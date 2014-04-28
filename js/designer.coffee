@@ -1,9 +1,15 @@
 socket = io.connect('/')
 
-single = require './single-line-editor'
-list = require './list-manager'
+# single = require './single-line-editor'
+# list = require './list-manager'
 
-single.editable(socket)
-list.manageLists(socket)
+# single.editable(socket)
+# list.manageLists(socket)
 
-$('.beer-feature').find('[data-design-text]').removeAttr('contenteditable')
+PopUp = require './popup'
+
+popup = new PopUp(socket)
+
+$('[data-design-text]').on 'click.preventDefault', (event) -> event.preventDefault()
+$('[data-design-text]').on 'click.popup', (event) ->
+  popup.setTargetAndUnhide(this)

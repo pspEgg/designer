@@ -10,7 +10,7 @@ makeListItem = (listName) ->
       # obj[prop] = 'sample' if prop != 'id'
     # $(element).data('design-text')[prop] = 'sample'
     # Trigger draft()
-    $(element).blur()
+    # $(element).blur() # BUGGED: randomly cauesing <span> to be saved in db
   return sample
 
 addListItem = (listName) ->

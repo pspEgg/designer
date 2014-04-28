@@ -54,6 +54,7 @@ if ( typeof Object.create !== 'function' ) {
 
             self.$elem.on('click', function(event) {
                 event.preventDefault();
+                console.log('clicked!');
                 if(self.$elem.hasClass('pressed')) {
                     self.hide();
                 } else {

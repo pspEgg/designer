@@ -10,18 +10,20 @@ draft = (event, el, socket) ->
   attr.text = $(el).text()
   console.log 'drafting ' + attr.text
   socket.emit('draft', attr)
-  el.blur()
-  event.preventDefault()
+  
 
-exports.editable = (socket) ->
-  $('[data-design-text]')
+exports.editable = (element, socket) ->
+  console.log('making a editable')
+  $(element)  
     .attr('contenteditable', true)
     .keydown (event) ->
       switch event.which
-        # ESC Key
+        # ES{C Key
         when 27 then revert(this)
         # Enter Key
         when 13
-          this.blur()
+          # prevent creation of "new line"
           event.preventDefault()
+          this.blur()
     .blur (event) -> draft(event, this, socket)
+
