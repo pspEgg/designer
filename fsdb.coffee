@@ -90,7 +90,7 @@ class FSDB
     # Non-list data
     if dataName = data.static
       @snapshot.static[dataName] = text
-      save(@path, @snapshot)
+      # save(@path, @snapshot)
       return
 
     # List Data
@@ -102,13 +102,13 @@ class FSDB
     for listItem in @snapshot[list]
       if listItem.id is id
         listItem[prop] = text
-        save(@path, @snapshot)
+        # save(@path, @snapshot)
         return
     # No exisiting id
     newItem = {id: id}
     newItem[prop] = text
     @snapshot[list].unshift newItem 
-    save(@path, @snapshot)
+    # save(@path, @snapshot)
 
   static: (dataName) ->
     text = @snapshot.static[dataName] or (@snapshot.static[dataName] = 'new editable')
@@ -120,7 +120,7 @@ class FSDB
     >#{text}</span>"
 
   readOnly: (dataName) ->
-    text = @snapshot[dataName] or (@snapshot[dataName] = 'new editable')
+    text = @snapshot.static[dataName] or (@snapshot.static[dataName] = 'new editable')
     "#{text}"
 
 module.exports = FSDB
